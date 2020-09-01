@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  // appel a une fonction cree dans le module routeur
+  script.
+    var f1 = function() { document.getElementById('myImage').src='#{images.item1}' }
+    var f2 = function() { document.getElementById('myImage').src='#{images.item2}' }
+    var f3 = function() { document.getElementById('myImage').src='#{images.item3}' }
+    var marsuImg = function() {document.getElementById('myImage').src='#{images.item4}' }
+    alert('#{title}')
+
+
+  button(onclick='f1()') One!
+  button(onclick='f2()') Two!
+  button(onclick='f3()') Three!
+  button(onclick='marsuImg()') marsu!
+  p
+  a: img(id='myImage' height='200' width='200' src='')
+  |
+  |
+  // tentative d'envoie d'un bouton vers la fonction fichier js
+  a(class='button', href="//localhost:1337/javascripts/obligatoireOuNon.js") Obligatoire?
+  a(class='button', href="//localhost:1337/images/marsupilami-logo.png") ViaHref....
+  //a(class='button', href='marsuImg()') ViaHref.... // l'appel la variable marsuImg() NE MARCHE PAS
+
+  // html // a utiliser pour faire appel a des syntaxes hors pug
+    head 
+        meta(charset="utf-8")
+        meta(name='description', content='Certaines descriptions')
+        meta(name='viewport', content ='width=device-width, initial-scale=1')
+        // tentative d'appel a une fonction sur script js public
+        script(scr = "//localhost:1337/javascripts/obligatoireOuNon.js")
